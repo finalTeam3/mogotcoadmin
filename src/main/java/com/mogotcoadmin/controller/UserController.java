@@ -1,4 +1,4 @@
-package com.admin.controller;
+package com.mogotcoadmin.controller;
 
 import java.util.HashMap;
 
@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.admin.dto.UserDTO;
-import com.admin.service.UserService;
+import com.mogotcoadmin.dto.UserDTO;
+import com.mogotcoadmin.service.UserService;
 
 @Controller
 @RequestMapping("/user")

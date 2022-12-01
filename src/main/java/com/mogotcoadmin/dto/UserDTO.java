@@ -1,4 +1,4 @@
-package com.admin.dto;
+package com.mogotcoadmin.dto;
 
 import java.util.Date;
 
@@ -28,6 +28,11 @@ public class UserDTO {
 	private String kakaoid;
 	private String googleid;
 	private String usergen;
+	private String addrnum;
+	private String addrdetail;
+	private String addrextra;
+	private String snsinsta;
+	private String snsgit;
 	
 	private int mentor_mentorok;
 }

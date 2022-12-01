@@ -1,13 +1,13 @@
-package com.admin.service;
+package com.mogotcoadmin.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.admin.dto.UserDTO;
-import com.admin.frame.MyService;
-import com.admin.mapper.UserMapper;
+import com.mogotcoadmin.dto.UserDTO;
+import com.mogotcoadmin.frame.MyService;
+import com.mogotcoadmin.mapper.UserMapper;
 
 @Service
 public class UserService implements MyService<String, UserDTO>{
@@ -43,6 +43,9 @@ public class UserService implements MyService<String, UserDTO>{
 	public UserDTO getMypage(String k) throws Exception {
 		return mapper.selectMypage(k);
 	}
-
+	
+	public void deleteuser(UserDTO user) throws Exception {
+		mapper.deleteuser(user);
+	}
 
 }

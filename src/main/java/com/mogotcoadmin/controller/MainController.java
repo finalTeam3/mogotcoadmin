@@ -1,4 +1,4 @@
-package com.admin.controller;
+package com.mogotcoadmin.controller;
 
 
 import org.springframework.stereotype.Controller;

@@ -1,4 +1,4 @@
-package com.admin.frame;
+package com.mogotcoadmin.frame;
 
 import java.util.List;
 
