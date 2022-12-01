@@ -2,6 +2,28 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
+<style>
+
+@keyframes blink-effect {
+  50% {
+    opacity: 0.4;
+  }
+}
+
+#blink {
+  animation: blink-effect 1s step-end infinite;
+
+  /*
+  animation-name: blink-effect;
+  animation-duration: 1s;
+  animation-iteration-count:infinite;
+  animation-timing-function:step-end;
+  */
+}
+
+</style>
+
 </head>
 
 		<div class="container-fluid pt-4 px-4">
@@ -34,7 +56,10 @@
                                             <td th:text="${mentor.mentorcom}"></td>
                                             <td th:text="${#dates.format(mentor.mentorapply,'yyyy-MM-dd HH:mm')}"></td>
                                             <td th:text="${#dates.format(mentor.mentordate,'yyyy-MM-dd HH:mm')}"></td>
-                                            <td th:text="${mentor.mentorok}"></td>
+                                            <td>
+                                            <button type="button" class="btn btn-sm btn-primary m-2" th:if="${mentor.mentorok == 1}">승인 완료</button>
+                                            <button id="blink" type="button" class="btn btn-sm btn-danger m-2" th:if="${mentor.mentorok == 0}">승인 대기</button>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>

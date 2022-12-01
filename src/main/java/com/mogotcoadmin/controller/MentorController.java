@@ -3,13 +3,15 @@ package com.mogotcoadmin.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mogotcoadmin.dto.MentorDTO;
-import com.mogotcoadmin.dto.UserDTO;
 import com.mogotcoadmin.service.MentorService;
 
 
@@ -53,10 +55,22 @@ public class MentorController {
 	}
 	
 	@RequestMapping("/qualify")
-	public String qualify(Model model, int mentorid) {
-		System.out.println(mentorid);
+	public String qualify(Model model, MentorDTO mentor, HttpServletRequest request) {
+		System.out.println(mentor);
+		HttpSession session = request.getSession();
+		String admid = (String)session.getAttribute("adminid");
+		System.out.println(admid);
+		MentorDTO mdto = null;
 		
-		return "redirect:/";
+		try {
+			mdto = new MentorDTO(mentor.getMentorid(), null, admid, null, null, null, null, 1, null, 3, null, null, null, null, null, null, null,null,null,null,null);
+			service.adminupdate(mdto);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return "redirect:detail?mentorid=" + mentor.getMentorid();
 	}
 
 	
