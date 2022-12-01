@@ -21,7 +21,7 @@
 
                                 <dt class="col-sm-4">메일</dt>
                                 <dd class="col-sm-8" th:text="${user.useremail}"></dd>
-
+								<dt>&nbsp</dt>
                                 <dt class="col-sm-4">SNS ID</dt>
                                 <dd class="col-sm-8">
                                     <dl class="row">
@@ -50,6 +50,7 @@
                                 <dd class="col-sm-8" th:if="${not #strings.isEmpty(user.addrextra)}" th:text="${user.addrextra}" style="word-break: break-all"></dd>
                                 <dd class="col-sm-8" th:if="${#strings.isEmpty(user.addrextra)}" th:text="미입력"></dd>
                                 
+                                <dt>&nbsp</dt>
                                 <dt class="col-sm-4">SNS 개인 계정</dt>
                                 <dd class="col-sm-8">
                                     <dl class="row">

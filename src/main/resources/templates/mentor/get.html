@@ -14,26 +14,27 @@
                                 <table class="table table-hover" style="text-align:center">
                                     <thead>
                                         <tr>
+                                            <th scope="col">멘토 번호</th>
                                             <th scope="col">사용자 ID</th>
-                                            <th scope="col">이름</th>
-                                            <th scope="col">생년월일</th>
-                                            <th scope="col">성별</th>
-                                            <th scope="col">포인트</th>
-                                            <th scope="col">탈퇴여부</th>
-                                            <th scope="col">가입일</th>
+                                            <th scope="col">담당 관리자</th>
+                                            <th scope="col">회사</th>
+                                            <th scope="col">신청 날짜</th>
+                                            <th scope="col">승인 날짜</th>
+                                            <th scope="col">승인 여부</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr th:each="user:${user}">
-                                            <th scope="row">
-		                                    	<a th:text="${user.userid}" th:href="@{/user/detail(userid=${user.userid})}"></a>
+                                        <tr th:each="mentor:${mentor}">
+                                            <th scope="row" th:text="${mentor.mentorid}">
                                             </th>
-                                            <td th:text="${user.username}"></td>
-                                            <td th:text="${user.userbirth}"></td>
-                                            <td th:text="${user.usergen}"></td>
-                                            <td th:text="${user.userpoint}"></td>
-                                            <td th:text="${user.withdraw}"></td>
-                                            <td th:text="${#dates.format(user.userdate,'yyyy-MM-dd HH:mm')}"></td>
+                                            <td>
+		                                    	<a th:text="${mentor.userid}" th:href="@{/mentor/detail(mentorid=${mentor.mentorid})}"></a>
+                                            </td>
+                                            <td th:text="${mentor.adminid}"></td>
+                                            <td th:text="${mentor.mentorcom}"></td>
+                                            <td th:text="${#dates.format(mentor.mentorapply,'yyyy-MM-dd HH:mm')}"></td>
+                                            <td th:text="${#dates.format(mentor.mentordate,'yyyy-MM-dd HH:mm')}"></td>
+                                            <td th:text="${mentor.mentorok}"></td>
                                         </tr>
                                     </tbody>
                                 </table>
