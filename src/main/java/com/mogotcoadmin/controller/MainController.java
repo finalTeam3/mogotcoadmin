@@ -1,8 +1,14 @@
 package com.mogotcoadmin.controller;
 
 
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.mogotcoadmin.dto.AdminDTO;
+import com.mogotcoadmin.service.AdminService;
 
 
 
@@ -10,12 +16,38 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/")
 public class MainController {
 	
+	@Autowired
+	AdminService service;
 
 	@RequestMapping("")
 	public String main() {
 		return "main";
 	}
+
+	@RequestMapping("/loginimpl")
+	public String loginimpl(HttpSession session, String adminid, String adminpwd) {
+		AdminDTO adm = null;
+		try {
+			adm = service.get(adminid);
+			if(adm != null) {
+				if(adm.getAdminpwd().equals(adminpwd)) {
+					session.setAttribute("loginadmin", adm);
+				}
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "redirect:/";
+	}
 	
+	@RequestMapping("/logout")
+	public String logout(HttpSession session) {
+		if(session != null) {
+			session.invalidate();
+		}
+		return "redirect:/";
+	}
 
 	
 }

@@ -52,7 +52,12 @@ public class MentorController {
 		return "main";
 	}
 	
-	
+	@RequestMapping("/qualify")
+	public String qualify(Model model, int mentorid) {
+		System.out.println(mentorid);
+		
+		return "redirect:/";
+	}
 
 	
 }
