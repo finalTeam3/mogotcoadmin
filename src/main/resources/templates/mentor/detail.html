@@ -9,10 +9,21 @@ $(document).ready(function(){
 	$('#update_btn').click(function(){
 		$('#update_form').attr({
 			'method':'post',
-			'action':'[[@{/mentor/qualify}]]'
+			'action':'[[@{/mentor/qualifyimpl}]]'
 		});
 		$('#update_form').submit();
 	});
+	
+	$('#cancel_btn').click(function(){
+		$('#update_form').attr({
+			'method':'post',
+			'action':'[[@{/mentor/cancelimpl}]]'
+		});
+		$('#update_form').submit();
+	});
+	
+	
+	
 });
 
 </script>
@@ -102,7 +113,7 @@ $(document).ready(function(){
                             <!-- <div>&nbsp</div> -->
                             <div class="col-sm-12 text-center">
                             <button type="button" id="update_btn" class="btn btn-lg btn-primary m-2" th:if="${mentor.mentorok == 0}">승인하기</button>
-                            <button type="button" class="btn btn-lg btn-danger m-2" th:if="${mentor.mentorok == 1}">취소하기</button>
+                            <button type="button" id="cancel_btn" class="btn btn-lg btn-danger m-2" th:if="${mentor.mentorok == 1}">취소하기</button>
                             </div>
                             
                         </div>
