@@ -61,4 +61,9 @@ public class MentoringService implements MyService<Integer, MentoringDTO> {
 		return mapper.mentoringimmed();
 	}
 
+	// 상세한 멘토링 정보 하나씩 출력
+	public MentoringDTO viewMentoringOne(int mentoringid) throws Exception{
+		return mapper.viewMentoringOne(mentoringid);
+	}
+
 }

@@ -138,10 +138,11 @@ $(document).ready(function(){
                 </form>
                 <div class="navbar-nav align-items-center ms-auto">
 
-	                <div th:if="${session.loginadmin == null}">
+	                <div th:if="${session.loginadmin == null}" style="margin:10px 10px 15px 10px ;">
 						<a type="button" class="material-icons md maincolor" data-toggle="modal" data-target="#loginModal">login</a>
 						<a>&nbsp&nbsp&nbsp</a>
 						<a type="button" class="material-icons md maincolor" ><i class="fa fa-user me-lg-2"></i></a> <!-- 회원가입 -->
+	                	<!-- <div style="margin:10px 10px 20px 10px ;"></div> -->
 	                </div>
 
                     <div class="nav-item dropdown" th:if="${session.loginadmin != null}">
