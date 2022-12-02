@@ -26,7 +26,7 @@ public class MentoringController {
 	public String get(Model model) {
 		List<MentoringDTO> mti = null;
 		try {
-			mti = service.get();
+			mti = service.viewMentoringAll();
 			model.addAttribute("mti", mti);
 			model.addAttribute("center", dir+"get");
 		} catch (Exception e) {
@@ -37,8 +37,17 @@ public class MentoringController {
 	}
 	
 	@RequestMapping("/detail")
-	public String detail(Model model) {
-		model.addAttribute("center", dir+"detail");
+	public String detail(Model model, int mentoringid) {
+		MentoringDTO mti = null;
+		try {
+			mti = service.viewMentoringOne(mentoringid);
+			model.addAttribute("mti",mti);
+			model.addAttribute("center", dir+"detail");
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return "main";
 	}
 

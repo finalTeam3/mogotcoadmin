@@ -62,4 +62,7 @@ public interface MentoringMapper extends MyMapper<Integer, MentoringDTO> {
 	public List<MentoringDTO> nallrecentsearch() throws Exception;
 	// -- 전체, 사후관리 유무(choyunyoung add)
 	public List<MentoringDTO> nallmcaringoksearch(int mcaring) throws Exception;
+	
+	// 상세한 멘토링 정보 하나씩 출력
+	public MentoringDTO viewMentoringOne(int mentoringid) throws Exception;
 }

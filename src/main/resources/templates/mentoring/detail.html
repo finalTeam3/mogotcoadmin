@@ -24,86 +24,72 @@ $(document).ready(function(){
                     <div class="col-sm-12 col-md-6 col-xl-8" style="float:none; margin:0  auto;">
 						
 						<form id="update_form">
-                        <div class="bg-light rounded h-100 p-4" th:each="mentor:${mentor}">
+                        <div class="bg-light rounded h-100 p-4" th:each="mti:${mti}">
                         
                             <div class="testimonial-item text-center">
-                            <img class="img-fluid rounded-circle mx-auto mb-4" th:src="@{/img/}+${mentor.mentorimg}" style="width: 15%;">
-                                <input th:value=${mentor.mentorimg} name="mentorimg" style="display:none">
-                                <h5 class="mb-1" th:text="${mentor.user_username}">Name</h5>
+                            <img class="img-fluid rounded mx-auto mb-4" th:src="@{/img/}+${mti.mentoringimg}" style="width: 50%;">
+                                <!-- <input th:value=${mentor.mentorimg} name="mentorimg" style="display:none"> -->
+                                <h5 class="mb-1" th:text="${mti.mtitle}">Name</h5>
                             </div>                        
                             <hr>
                             <dl class="row mb-0">
-                                <!-- mentorid 받는 태그 -->
-                                <dd class="col-sm-4" th:text="${mentor.mentorid}" id="mentorid" style="display:none"></dd>
-                                <input th:value=${mentor.mentorid} name="mentorid" style="display:none">
+                                <!-- mentoringid 받는 태그 -->
+                                <dd class="col-sm-4" th:text="${mti.mentoringid}" id="mentoringid" style="display:none"></dd>
+                                <!-- <input th:value=${mentor.mentorid} name="mentorid" style="display:none"> -->
                                 
-                                <dt class="col-sm-4">사용자 ID</dt>
-                                <dd class="col-sm-8" th:text="${mentor.userid}"></dd>
-                                <input th:value=${mentor.userid} name="userid" style="display:none">
-
-                                <dt class="col-sm-4">담당 관리자</dt>
-                                <dd class="col-sm-8" th:text="${mentor.adminid}"></dd>
-                                <input th:value=${mentor.adminid} name="adminid" style="display:none">
-
-                                <dt class="col-sm-4">멘토 승인 여부</dt>
-                                <dd class="col-sm-8" th:if="${mentor.mentorok == 1}">승인</dd>
-                                <dd class="col-sm-8" th:if="${mentor.mentorok == 0}">미승인</dd>
-                                <input th:value=${mentor.mentorok} name="mentorok" style="display:none">
-                                
-								<hr>
-                                <dt class="col-sm-4">명함</dt>
+                                <dt class="col-sm-4">담당 멘토</dt>
                                 <dd class="col-sm-8">
                                     <dl class="row">
-                                        <dt class="col-sm-4">이미지
+<!--                                         <dt class="col-sm-4">이미지
                                         </dt>
 		                                <dd class="col-sm-8" >
 			                            <img class="img-fluid rounded mx-auto mb-4" th:src="@{/img/}+${mentor.mcardimg}" alt="명함 이미지" style="width: 150%;">
-                                		<input th:value=${mentor.mcardimg} name="mcardimg" style="display:none">
-		                                </dd>
+		                                </dd> -->
+                                        <dt class="col-sm-4">이름</dt>
+		                                <dd class="col-sm-8" th:text="${mti.user_username}"></dd>
                                         <dt class="col-sm-4">회사</dt>
-		                                <dd class="col-sm-8" th:text="${mentor.mentorcom}"></dd>
-                                		<input th:value=${mentor.mentorcom} name="mentorcom" style="display:none">
-<!--                                         <dd class="col-sm-8" th:if="${not #strings.isEmpty(user.naverid)}" th:text="${user.naverid}"></dd>
-                                        <dd class="col-sm-8" th:if="${#strings.isEmpty(user.naverid)}" th:text="미입력"></dd> -->
-                                        <dt class="col-sm-4">직급</dt>
-		                                <dd class="col-sm-8" th:text="${mentor.mcardposition}"></dd>
-                                		<input th:value=${mentor.mcardposition} name="mcardposition" style="display:none">
+		                                <dd class="col-sm-8" th:text="${mti.mentor_mentorcom}"></dd>
                                     </dl>
                                 </dd>
                                 <hr>
-                                
-                                <dt class="col-sm-4">소개</dt>
-                                <dd class="col-sm-8" th:text="${mentor.mentorcon}" style="word-break: break-all"></dd>
-                                <input th:value=${mentor.mentorcon} name="mentorcon" style="display:none">
+                                <dt class="col-sm-4">멘토링 내용</dt>
+                                <dd class="col-sm-8" th:text="${mti.mcontents}"></dd>
+                                <!-- <input th:value=${mentor.userid} name="userid" style="display:none"> -->
 
-                                <dt class="col-sm-4">경력</dt>
-                                <dd class="col-sm-8" th:text="${mentor.mentorcareer}" style="word-break: break-all"></dd>
-                                <input th:value=${mentor.mentorcareer} name="mentorcareer" style="display:none">
+                                <dt class="col-sm-4">카테고리</dt>
+                                <dd class="col-sm-8" th:text="${mti.mcate_mname}"></dd>
+                                <!-- <input th:value=${mentor.adminid} name="adminid" style="display:none"> -->
+                                
+                                
+                                <dt class="col-sm-4">등록일</dt>
+                                <dd class="col-sm-8" th:text="${#dates.format(mti.mrdate,'yyyy-MM-dd HH:mm')}" style="word-break: break-all"></dd>
+
+                                <dt class="col-sm-4">실시일</dt>
+                                <dd class="col-sm-8" th:text="${#dates.format(mti.mentoringdate,'yyyy-MM-dd')}" style="word-break: break-all"></dd>
+
+                                <dt class="col-sm-4">장소</dt>
+                                <dd class="col-sm-8" th:text="${mti.mplace}" style="word-break: break-all"></dd>
                                 <hr>
                                 
-                                <dt class="col-sm-4">신청 날짜</dt>
-                                <dd class="col-sm-8" th:text="${#dates.format(mentor.mentorapply,'yyyy-MM-dd HH:mm')}" style="word-break: break-all"></dd>
-                                <!-- <input th:value=${mentor.mentorapply} name="mentorapply" style="display:none"> -->
+                                <dt class="col-sm-4">비대면용 url</dt>
+                                <dd class="col-sm-8" th:text="${mti.mentorurl}" style="word-break: break-all"></dd>
                                 
-                                <dt class="col-sm-4">승인 날짜</dt>
-                                <dd class="col-sm-8" th:if="${not #strings.isEmpty(mentor.mentordate)}" th:text="${#dates.format(mentor.mentordate,'yyyy-MM-dd HH:mm')}" style="word-break: break-all"></dd>
-                                <dd class="col-sm-8" th:if="${#strings.isEmpty(mentor.mentordate)}" th:text="미승인"></dd>
-                                <!-- <input th:value=${mentor.mentordate} name="mentordate" style="display:none"> -->
+                                <dt class="col-sm-4">모집정원</dt>
+                                <dd class="col-sm-8" th:text="${mti.mmemberidcnt}" style="word-break: break-all"></dd>
                                 
+                                <dt class="col-sm-4">케어 서비스</dt>
+                                <dd class="col-sm-8" th:if="${mti.mcaring == 1}">제공</dd>
+                                <dd class="col-sm-8" th:if="${mti.mcaring == 0}">미제공</dd>
                                 
-                                <dt class="col-sm-4">멘토링 취소 제한</dt>
-                                <dd class="col-sm-8" th:text="${mentor.cancelmentoring}" style="word-break: break-all"></dd>
-                                <input th:value=${mentor.cancelmentoring} name="cancelmentoring" style="display:none">
-<!--                                 <dd class="col-sm-8" th:if="${not #strings.isEmpty(user.addrextra)}" th:text="${mentor.addrextra}" style="word-break: break-all"></dd>
-                                <dd class="col-sm-8" th:if="${#strings.isEmpty(user.addrextra)}" th:text="미입력"></dd> -->
+                                <dt class="col-sm-4">가격</dt>
+                                <dd class="col-sm-8" th:text="${mti.mentoringprice}" style="word-break: break-all"></dd>
 
                             </dl>
-                            <hr>
                             <!-- <div>&nbsp</div> -->
-                            <div class="col-sm-12 text-center">
+<!--                             <div class="col-sm-12 text-center">
                             <button type="button" id="update_btn" class="btn btn-lg btn-primary m-2" th:if="${mentor.mentorok == 0}">승인하기</button>
                             <button type="button" class="btn btn-lg btn-danger m-2" th:if="${mentor.mentorok == 1}">취소하기</button>
-                            </div>
+                            </div> -->
                             
                         </div>
                         </form>

@@ -9,6 +9,20 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		SELECT * FROM mentoring WHERE mentoringid=#{mentoringid}
 	</select>
 
+	<select id="viewMentoringOne" parameterType="Integer"
+		resultType="MentoringDTO">
+		SELECT mt.mentoringid, mt.mentorid, mu.username AS user_username,
+		mu.userid AS user_userid, mr.mentorimg, 
+		mr.mentorcom AS mentor_mentorcom, 
+		mc.mname AS mcate_mname, mt.mtitle, mt.mentoringdate, mt.mplace, mt.mcontents,
+		mt.mentoringimg, mt.mentorurl, mt.mrdate, mt.mmemberidcnt, 
+		mt.mcaring, mt.mentoringprice FROM mentoring mt
+		INNER JOIN mentor mr ON mt.mentorid = mr.mentorid
+		INNER JOIN user mu ON mr.userid = mu.userid
+		INNER JOIN mcate mc ON mt.mcateid = mc.mcateid
+		WHERE mentoringid=#{mentoringid}
+	</select>
+
 	<select id="selectAll" resultType="MentoringDTO">
 		SELECT * FROM mentoring
 	</select>
@@ -34,8 +48,9 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	<!-- 등록된 모든 멘토링 리스트 출력을 위한 mybatis 연동 -->
 	<select id="viewMentoringAll" resultType="MentoringDTO">
 		SELECT mt.mentoringid, mt.mentorid, mu.username AS user_username,
-		mu.userid AS user_userid, mr.mentorimg, mr.mentorcom AS mentor_mentorcom, 
-		mc.mname, mt.mtitle, mt.mentoringdate, mt.mplace, mt.mcontents,
+		mu.userid AS user_userid, mr.mentorimg, 
+		mr.mentorcom AS mentor_mentorcom, 
+		mc.mname AS mcate_mname, mt.mtitle, mt.mentoringdate, mt.mplace, mt.mcontents,
 		mt.mentoringimg, mt.mentorurl, mt.mrdate, mt.mmemberidcnt, 
 		mt.mcaring, mt.mentoringprice FROM mentoring mt
 		INNER JOIN mentor mr ON mt.mentorid = mr.mentorid
