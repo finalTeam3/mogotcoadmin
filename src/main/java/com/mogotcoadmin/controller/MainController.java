@@ -11,15 +11,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.mogotcoadmin.dto.AdminDTO;
 import com.mogotcoadmin.service.AdminService;
 
-
-
 @Controller
 @RequestMapping("/")
 public class MainController {
 	
 	@Autowired
 	AdminService service;
-
+	
 	@RequestMapping("")
 	public String main() {
 		return "main";
@@ -56,4 +54,15 @@ public class MainController {
 		return "main";
 	}
 	
+	//회원가입기능
+	@RequestMapping("/registerimpl")
+	public String registerimpl(AdminDTO admin) {
+		try {
+			service.register(admin);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "main";
+	}
+		
 }

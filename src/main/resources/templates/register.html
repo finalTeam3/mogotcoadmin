@@ -3,6 +3,55 @@
 <head>
 <meta charset="utf-8">
 <title>DASHMIN - Bootstrap Admin Template</title>
+
+<script>
+
+$(document).ready(function(){
+	
+	/* 아이디 중복 체크 */
+	$('#id').keyup(function(){
+		var id = $('#id').val();
+		$.ajax({
+			url : '[[@{/checkid}]]',
+			data : {'cid' : id},
+			success : function(result) {
+				if (result == 't') {
+					$('#ispan').text('사용 가능한 ID 입니다.')
+					$('#ispan').attr('class', 'correct');
+				} else {
+					$('#ispan').text('다른 ID를 입력해주세요.')
+					$('#ispan').attr('class', 'incorrect');
+				}
+			}
+		});
+	});
+	
+	/* 비밀번호 확인시 일치 여부 */
+	$('#pwd2').keyup(function(){
+		var pwd = $('#pwd').val();
+		var pwd2 = $('#pwd2').val();
+		if(pwd == pwd2) {
+			$('#pspan').text('비밀번호가 일치합니다.')
+			$('#pspan').attr('class', 'correct');
+		} else {
+			$('#pspan').text('비밀번호가 일치하지 않습니다.')
+			$('#pspan').attr('class', 'incorrect');
+		};
+	});
+	
+	/* 회원가입 */
+	$('#register_btn').click(function(){
+		$('#register_form').attr({
+			'action' : '[[@{/registerimpl}]]',
+			'method' : 'post'
+		});
+		$('#register_form').submit();
+	});
+	
+});
+
+</script>
+
 </head>
 
         <!-- Spinner End -->
@@ -11,35 +60,39 @@
         <!-- Sign Up Start -->
         <div class="container-fluid">
             <div class="row h-100 align-items-center justify-content-center" style="min-height: 100vh;">
-                <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
+                <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-6">
                     <div class="bg-light rounded p-4 p-sm-5 my-4 mx-3">
                         <div class="d-flex align-items-center justify-content-between mb-3">
                             <a href="index.html" class="">
-                                <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>DASHMIN</h3>
+                                <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>MGC ADMIN</h3>
                             </a>
-                            <h3>Sign Up</h3>
+                            <h3>REGISTER</h3>
                         </div>
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingText" placeholder="jhondoe">
-                            <label for="floatingText">Username</label>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-                            <label for="floatingInput">Email address</label>
-                        </div>
+                        <form class="register_form" id = "register_form" name = "register_form">
                         <div class="form-floating mb-4">
-                            <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-                            <label for="floatingPassword">Password</label>
+                            <input type="text" class="form-control" id="id" name = "adminid">
+                            <label for="id">ID</label>
+                            <span id = "ispan"></span>
                         </div>
-                        <div class="d-flex align-items-center justify-content-between mb-4">
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                            </div>
-                            <a href="">Forgot Password</a>
+                        
+                        <div class="form-floating mb-4">
+                            <input type="password" class="form-control" id="pwd" name = "adminpwd">
+                            <label for="pwd">Password</label>
                         </div>
-                        <button type="submit" class="btn btn-primary py-3 w-100 mb-4">Sign Up</button>
-                        <p class="text-center mb-0">Already have an Account? <a href="">Sign In</a></p>
+                        
+                        <div class="form-floating mb-4">
+                            <input type="password" class="form-control" id="pwd2" name="pwd2">
+                            <label for="pwd2">Password Confirm</label>
+                            <span id = "pspan"></span>
+                        </div>
+                        
+                        <div class="form-floating mb-4">
+                            <input type="text" class="form-control" id="name" name = "adminname">
+                            <label for="name">Name</label>
+                        </div>
+                        
+                        <button id = "register_btn" class="btn btn-primary py-3 w-100 mb-4">Sign Up</button>
+                    	</form>
                     </div>
                 </div>
             </div>
