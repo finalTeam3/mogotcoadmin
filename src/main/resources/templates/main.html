@@ -141,7 +141,7 @@ $(document).ready(function(){
 	                <div th:if="${session.loginadmin == null}" style="margin:10px 10px 15px 10px ;">
 						<a type="button" class="material-icons md maincolor" data-toggle="modal" data-target="#loginModal">login</a>
 						<a>&nbsp&nbsp&nbsp</a>
-						<a type="button" class="material-icons md maincolor" ><i class="fa fa-user me-lg-2"></i></a> <!-- 회원가입 -->
+						<a th:href = "@{/register}" class="material-icons md maincolor" >Register</a> <!-- 회원가입 -->
 	                	<!-- <div style="margin:10px 10px 20px 10px ;"></div> -->
 	                </div>
 
