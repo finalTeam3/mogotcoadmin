@@ -12,7 +12,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mogotcoadmin.dto.MentorDTO;
+import com.mogotcoadmin.dto.UserDTO;
 import com.mogotcoadmin.service.MentorService;
+import com.mogotcoadmin.service.UserService;
 
 
 
@@ -24,6 +26,9 @@ public class MentorController {
 	
 	@Autowired
 	MentorService service;
+	
+	@Autowired
+	UserService service1;
 
 	@RequestMapping("/get")
 	public String main(Model model) {
@@ -62,6 +67,24 @@ public class MentorController {
 			mtdto = service.get(mentor.getMentorid());
 			mdto = new MentorDTO(mtdto.getMentorid(), mtdto.getUserid(), mentor.getAdminid(), mtdto.getMentorcom(), mtdto.getMentorcon(), mtdto.getMentorimg(), mtdto.getMcardimg(), 1, mtdto.getMentordate(), 3, mtdto.getMentorcareer(), mtdto.getMentorapply(), mtdto.getMcardposition(), mtdto.getMpimg(), mtdto.getMcimg(), mtdto.getMentoring_mentoringid(), mtdto.getMentoring_mtitle(), mtdto.getMentoring_mentoringimg(), mtdto.getMentoring_mentoringdate(), mtdto.getMentoring_mplace(), mtdto.getUser_username());
 			service.adminupdate(mdto);
+			
+			UserDTO before = null;
+			UserDTO after = null;
+			
+			int beforepoint= 0;
+			int afterpoint = 0;
+			
+			//mentor정보 불러옴
+			before = service1.get(mtdto.getUserid());
+			
+			//point변화
+			beforepoint = before.getUserpoint();
+			afterpoint = beforepoint + 2000;
+			
+			//point수정
+			after = new UserDTO(before.getUserid(), before.getUserpwd(), before.getUsername(), before.getUseraddr(), before.getUsertel(), before.getUseremail(), before.getUserdate(), before.getWithdraw(), before.getUserbirth(), afterpoint, before.getNaverid(), before.getKakaoid(), before.getGoogleid(), before.getUsergen(), before.getAddrnum(), before.getAddrdetail(), before.getAddrextra(), before.getSnsinsta(), before.getSnsgit(), 1);
+			service1.modify(after);
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
