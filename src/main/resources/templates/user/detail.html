@@ -13,6 +13,7 @@
                             <div class="testimonial-item text-center">
                                 <h5 class="mb-1" th:text="${user.username}">Name</h5>
                             </div>                        
+								<dt>&nbsp</dt>
                             <hr>
                             <dl class="row mb-0">
                                 <dt class="col-sm-4">연락처</dt>
@@ -21,7 +22,7 @@
 
                                 <dt class="col-sm-4">메일</dt>
                                 <dd class="col-sm-8" th:text="${user.useremail}"></dd>
-								<dt>&nbsp</dt>
+								<hr>
                                 <dt class="col-sm-4">SNS ID</dt>
                                 <dd class="col-sm-8">
                                     <dl class="row">
@@ -36,7 +37,7 @@
                                         <dd class="col-sm-8" th:if="${#strings.isEmpty(user.googleid)}" th:text="미입력"></dd>
                                     </dl>
                                 </dd>
-                                
+                                <hr>
                                 <dt class="col-sm-4">우편번호</dt>
                                 <dd class="col-sm-8" th:text="${user.addrnum}"></dd>
                                 
@@ -49,8 +50,8 @@
                                 <dt class="col-sm-4">추가주소</dt>
                                 <dd class="col-sm-8" th:if="${not #strings.isEmpty(user.addrextra)}" th:text="${user.addrextra}" style="word-break: break-all"></dd>
                                 <dd class="col-sm-8" th:if="${#strings.isEmpty(user.addrextra)}" th:text="미입력"></dd>
-                                
-                                <dt>&nbsp</dt>
+                                <hr>
+                                <!-- <dt>&nbsp</dt> -->
                                 <dt class="col-sm-4">SNS 개인 계정</dt>
                                 <dd class="col-sm-8">
                                     <dl class="row">

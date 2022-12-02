@@ -57,13 +57,14 @@ public class MentorController {
 	@RequestMapping("/qualify")
 	public String qualify(Model model, MentorDTO mentor, HttpServletRequest request) {
 		System.out.println(mentor);
-		HttpSession session = request.getSession();
-		String admid = (String)session.getAttribute("adminid");
-		System.out.println(admid);
+		MentorDTO mtdto = null;
 		MentorDTO mdto = null;
 		
 		try {
-			mdto = new MentorDTO(mentor.getMentorid(), null, admid, null, null, null, null, 1, null, 3, null, null, null, null, null, null, null,null,null,null,null);
+			mtdto = service.get(mentor.getMentorid());
+			System.out.println("멘토 승인"+mtdto);
+			mdto = new MentorDTO(mtdto.getMentorid(), mtdto.getUserid(), mentor.getAdminid(), null, null, null, null, 1, null, 3, null, null, null, null, null, null, null,null,null,null,null);
+			System.out.println(mdto);
 			service.adminupdate(mdto);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

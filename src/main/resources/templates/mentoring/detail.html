@@ -43,7 +43,7 @@ $(document).ready(function(){
 
                                 <dt class="col-sm-4">담당 관리자</dt>
                                 <dd class="col-sm-8" th:text="${mentor.adminid}"></dd>
-                                <input th:value=${session.loginadmin.adminid} name="adminid" style="display:none">
+                                <input th:value=${mentor.adminid} name="adminid" style="display:none">
 
                                 <dt class="col-sm-4">멘토 승인 여부</dt>
                                 <dd class="col-sm-8" th:if="${mentor.mentorok == 1}">승인</dd>
@@ -83,7 +83,7 @@ $(document).ready(function(){
                                 
                                 <dt class="col-sm-4">신청 날짜</dt>
                                 <dd class="col-sm-8" th:text="${#dates.format(mentor.mentorapply,'yyyy-MM-dd HH:mm')}" style="word-break: break-all"></dd>
-                                <!-- <input th:value="${#dates.format(mentor.mentorapply)}" name="mentorapply" style="display:none"> -->
+                                <!-- <input th:value=${mentor.mentorapply} name="mentorapply" style="display:none"> -->
                                 
                                 <dt class="col-sm-4">승인 날짜</dt>
                                 <dd class="col-sm-8" th:if="${not #strings.isEmpty(mentor.mentordate)}" th:text="${#dates.format(mentor.mentordate,'yyyy-MM-dd HH:mm')}" style="word-break: break-all"></dd>
