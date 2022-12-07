@@ -40,5 +40,6 @@ public class MentorDTO {
 	private String mentoring_mplace;
 	private String user_username;
 	
-	
+	// 멘토 승인시 메일 보내기를 위함 _ 혜정
+	private String user_useremail;
 }
