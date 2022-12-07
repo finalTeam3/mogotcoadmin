@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+<style>
+@keyframes blink-effect {
+  50% {
+    opacity: 0.4;
+  }
+}
+
+#blink {
+  animation: blink-effect 1s step-end infinite;
+
+  /*
+  animation-name: blink-effect;
+  animation-duration: 1s;
+  animation-iteration-count:infinite;
+  animation-timing-function:step-end;
+  */
+}
+.comment_input_title
+{
+	width: 100%;
+	height: 38px;
+	border: solid 1px #d9d9d9;
+	border-radius: 3px;
+	padding-left: 19px;
+	font-size: 16px;
+	font-weight: 400;
+	color: #2c3145;
+	margin : 10px auto auto auto;
+}
+.comment_input_content
+{
+	width: 100%;
+	height: 180px;
+	border: solid 1px #d9d9d9;
+	border-radius: 3px;
+	padding-left: 19px;
+	font-size: 16px;
+	font-weight: 400;
+	color: #2c3145;
+	margin : 10px auto auto auto;
+}
+.modal-body-btn
+{
+	text-align: right;
+	margin : 10px;
+	display: inline;
+}
+</style>
+
+<script>
+$(document).ready(function(){
+	$('#send_btn').click(function(){
+		$('#board_form').attr({
+			method:'get',
+			action:'[[@{/board/boardtype}]]'
+		});
+		$('#board_form').submit();
+	});
+	$('#boardregi_btn').click(function(){
+		var adminid = '[[${session.loginadmin.adminid}]]';
+		var boardtypemodal = $('#boardtypemodal option:selected').val();
+		var boardtitle = $('#boardtitle').val();
+		var boardcontent = $('#boardcontent').val();
+		$.ajax({
+			url : '[[@{/addboard}]]',
+			data : {'adminid' : adminid,'boardtypemodal' : boardtypemodal, 'boardtitle' : boardtitle, 'boardcontent' : boardcontent},
+			success : function() {
+				$('#send_btn').click();
+			}
+		});
+	}); 
+});
+</script>
+</head>
+
+		<div class="container-fluid pt-4 px-4">
+			<div class="row g-4">
+			
+					<div class="col-12">
+                        <div class="bg-light rounded h-100 p-4">
+                            <h6 class="mb-4" style = "display:inline">Board List</h6>
+                            	<form id = "board_form">
+		                            <select id = "boardtype" name="boardtype" class="form-control" style = "display:inline;width:25%;margin-left:10px">
+		                            	<option value="3" selected>전체</option>
+										<option value="1">공지사항</option>
+										<option value="2">FAQ</option>
+									</select>
+									<button type="button" id = "send_btn" class="btn btn-sm btn-primary m-2">조회</button>
+									<button type="button" id = "register_btn" data-toggle="modal" data-target="#boardmodal" class="btn btn-sm btn-primary m-2">게시글 등록하기</button>
+								</form>
+                            <div class="table-responsive">
+                                <table class="table table-hover" style="text-align:center">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">게시판 종류</th>
+                                            <th scope="col">제목</th>
+                                            <th scope="col">작성자 아이디</th>
+                                            <th scope="col">작성 날짜</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="bl:${boardlist}">
+                                            <td scope="row" th:if="${bl.boardtype == 1}">공지사항</td>
+                                            <td scope="row" th:if="${bl.boardtype == 2}">FAQ</td>
+                                            <td><a th:href="@{/board/boarddetail(boardid=${bl.boardid})}" th:text="${bl.boardtitle}"></a></td>
+                                            <td th:text="${bl.adminid}"></td>
+                                            <td th:text="${#dates.format(bl.boarddate,'yyyy-MM-dd')}"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>				
+			
+			</div>
+		</div>
+		
+<!-- Board Register Modal -->
+<div class="modal fade" id="boardmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+    
+			<div class="modal-header">
+				<h6 class="modal-title" id="exampleModalLabel">게시글 작성하기</h6>
+			</div>
+      
+			<div class="modal-body">
+				<div class="add_comment_container">
+					
+					<form name = "review_form" id = "review_form" class = "review_form">
+					<!-- rating -->
+					
+						<select id = "boardtypemodal" name="boardtypemodal" class="form-control" style = "background-color:white">
+								<option value="1">공지사항</option>
+								<option value="2">FAQ</option>
+						</select>
+													
+						<input type="text" class="comment_input_title" name = "boardtitle" id = "boardtitle" placeholder="제목을 입력해주세요">
+						<input type="text" class="comment_input_content" name = "boardcontent" id = "boardcontent" placeholder="내용을 입력해주세요">
+					
+					</form>
+				</div>
+			</div>
+			
+			<div class="modal-body-btn">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				<button type="button" id = "boardregi_btn" class="btn btn-secondary" style = "background-color: #14bdee; border-color:#14bdee" data-dismiss="modal">등록하기</button>
+			</div>
+		</div>
+	</div>
+</div>     
+
+<!-- Board Select Modal -->
+<!-- <div class="modal fade" id="boardselectmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+    
+			<div class="modal-header">
+				<h6 class="modal-title" id="exampleModalLabel">게시글 확인하기</h6>
+			</div>
+      
+			<div class="modal-body">
+				<div class="add_comment_container">
+													
+						<input type="text" class="comment_input_type" id = "boardselecttype" placeholder="게시판 종류">
+						<input type="text" class="comment_input_title" id = "boardselecttypetitle" placeholder="제목">
+						<input type="text" class="comment_input_content" id = "boardselecttypecontent" placeholder="내용">
+				</div>
+			</div>
+			
+			<div class="modal-body-btn">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				<button type="button" id = "boardregi_btn" class="btn btn-secondary" style = "background-color: #14bdee; border-color:#14bdee" data-dismiss="modal">등록하기</button>
+			</div>
+		</div>
+	</div>
+</div>  -->            
+                
+
+</html>
