@@ -16,9 +16,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.mogotcoadmin.dto.CouponDTO;
 import com.mogotcoadmin.dto.MentorDTO;
+import com.mogotcoadmin.dto.UserCouponDTO;
 import com.mogotcoadmin.dto.UserDTO;
+import com.mogotcoadmin.service.CouponService;
 import com.mogotcoadmin.service.MentorService;
+import com.mogotcoadmin.service.UserCouponService;
 import com.mogotcoadmin.service.UserService;
 
 
@@ -34,6 +38,12 @@ public class MentorController {
 	
 	@Autowired
 	UserService service1;
+	
+	@Autowired
+	CouponService cservice;
+	
+	@Autowired
+	UserCouponService uservice;
 	
 	@Autowired
 	JavaMailSender mailSender;
@@ -76,22 +86,11 @@ public class MentorController {
 			mdto = new MentorDTO(mtdto.getMentorid(), mtdto.getUserid(), mentor.getAdminid(), mtdto.getMentorcom(), mtdto.getMentorcon(), mtdto.getMentorimg(), mtdto.getMcardimg(), 1, mtdto.getMentordate(), 3, mtdto.getMentorcareer(), mtdto.getMentorapply(), mtdto.getMcardposition(), mtdto.getMpimg(), mtdto.getMcimg(), mtdto.getMentoring_mentoringid(), mtdto.getMentoring_mtitle(), mtdto.getMentoring_mentoringimg(), mtdto.getMentoring_mentoringdate(), mtdto.getMentoring_mplace(), mtdto.getUser_username(), mtdto.getUser_useremail());
 			service.adminupdate(mdto);
 			
-			UserDTO before = null;
-			UserDTO after = null;
-			
-			int beforepoint= 0;
-			int afterpoint = 0;
-			
-			//mentor정보 불러옴
-			before = service1.get(mtdto.getUserid());
-			
-			//point변화
-			beforepoint = before.getUserpoint();
-			afterpoint = beforepoint + 2000;
-			
-			//point수정
-			after = new UserDTO(before.getUserid(), before.getUserpwd(), before.getUsername(), before.getUseraddr(), before.getUsertel(), before.getUseremail(), before.getUserdate(), before.getWithdraw(), before.getUserbirth(), afterpoint, before.getNaverid(), before.getKakaoid(), before.getGoogleid(), before.getUsergen(), before.getAddrnum(), before.getAddrdetail(), before.getAddrextra(), before.getSnsinsta(), before.getSnsgit(), 1);
-			service1.modify(after);
+			//coupon지급
+			UserCouponDTO userc = null;
+			userc = new UserCouponDTO(0, mtdto.getUserid(), 2, null, 0);
+			uservice.register(userc);
+
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
