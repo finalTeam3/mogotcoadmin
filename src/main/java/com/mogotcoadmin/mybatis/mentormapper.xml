@@ -22,7 +22,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	<select id="mentordetail" parameterType="Integer" resultType="MentorDTO">
 		SELECT m.mentorid, m.userid, u.username as user_username, m.adminid, m.mentorcom,
 		m.mentorcon, m.mentorimg, m.mcardimg, m.mentorok, m.mentordate, 
-		m.cancelmentoring, m.mentorcareer, m.mentorapply, m.mcardposition
+		m.cancelmentoring, m.mentorcareer, m.mentorapply, m.mcardposition, u.useremail AS user_useremail
 		FROM mentor m
 		INNER JOIN user u ON u.userid = m.userid
 		WHERE m.mentorid=#{mentorid}

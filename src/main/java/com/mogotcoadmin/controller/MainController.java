@@ -1,6 +1,5 @@
 package com.mogotcoadmin.controller;
 
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mogotcoadmin.dto.AdminDTO;
 import com.mogotcoadmin.service.AdminService;
+import com.mogotcoadmin.service.BoardService;
 
 @Controller
 @RequestMapping("/")
@@ -17,6 +17,9 @@ public class MainController {
 	
 	@Autowired
 	AdminService service;
+	
+	@Autowired
+	BoardService board_service;
 	
 	@RequestMapping("")
 	public String main() {
@@ -64,5 +67,5 @@ public class MainController {
 		}
 		return "main";
 	}
-		
+	
 }
