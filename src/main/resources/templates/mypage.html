@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+.form-control
+{
+	margin-left : 15px;
+}
+</style>
+<script>
+
+function changetext() {
+	const btnElement = document.getElementById('mpupdate_btn');
+	btnElement.innerText = "회원 정보 저장";
+}
+
+$(document).ready(function(){
+	$('#mpupdate_btn').click(function(){
+		$('#pwd').attr('readonly', false);  
+		$('#name').attr('readonly', false);  
+		
+		$('#mpupdate_btn').click(function(){
+			$('#pwd').attr('readonly', true);  
+			$('#name').attr('readonly', true);  
+			
+			$('#mypage_update_form').attr(
+				{
+					'action':'[[@{/mypageupdate}]]',
+					'method':'post'
+				}
+			);
+			$('#mypage_update_form').submit();
+		});
+	});
+}); 
+</script>
+</head>
+
+		<div class="container-fluid pt-4 px-4">
+			<div class="row g-4" style="float:none; margin:0  auto;">
+                    <div class="col-sm-12 col-md-6 col-xl-8" style="float:none; margin:0  auto;">
+
+                        <div class="bg-light rounded h-100 p-4">
+                        
+                            <div class="testimonial-item text-center">
+                                <h3 class="mb-1">MyPage</h3>
+                            </div>                        
+								<dt>&nbsp</dt>
+                            <hr>
+                            
+                            <form id = "mypage_update_form" class="comment_form">
+                            <table>
+                            <tbody>
+                            
+                            <div>
+								<td><label for = "id" class="form_title">ID</label></td>
+								<td><input type="text" class="form-control" id = "id" th:value = "${adm.adminid}" readonly = "readonly" name = "adminid"></td>
+							</div>
+                            </tr>
+                            
+                            <tr>
+                            <div>
+								<td><label for = "pwd" class="form_title">Password</label></td>
+								<td><input type="Password" class="form-control" id = "pwd" th:value = "${adm.adminpwd}" name = "adminpwd" readonly></td>
+							</div>
+							</tr>
+							
+							<tr>
+							<div>
+								<td><label for = "name" class="form_title">Name</label></td>
+								<td><input type="text" class="form-control" id = "name" th:value = "${adm.adminname}" name = "adminname" readonly></td>
+							</div>
+							</tr>
+								
+                            </tbody>
+                            </table>
+                            </form>
+                            
+                    		<button type='button' id = "mpupdate_btn" data-toggle="modal" data-target="#updatemodal" onclick = "changetext()" class="btn btn-sm btn-primary m-2" style="float:right;">회원 정보 수정</button>
+                        </div>                    
+<!--                         <div class="bg-light rounded h-100 p-4">
+                            <h6 class="mb-4">Testimonial</h6>
+                            <div class="owl-carousel testimonial-carousel">
+                                
+                                <div class="testimonial-item text-center">
+                                    <h5 class="mb-1">Client Name</h5>
+                                    <p>Profession</p>
+                                    <p class="mb-0">Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam</p>
+                                </div>
+                                
+                            </div>
+                        </div> -->
+                        
+                    </div>				
+			
+			
+			</div>
+		</div>
+		
+<!-- Update Modal -->
+<div class="modal fade" id="updatemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body">변경하고 싶은 정보를 변경 후 [회원 정보 저장] 을 눌러주세요~</div>
+       <div class="modal-body-btn"><button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button></div>
+      </div>
+    </div>
+</div>                
+                
+
+</html>
