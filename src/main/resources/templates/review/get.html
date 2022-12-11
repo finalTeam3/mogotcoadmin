@@ -8,7 +8,7 @@
 $(document).ready(function () {
 	$('#delete_btn').click(function() {
 		var c = confirm('리뷰를 정말 삭제하시겠습니까?');
-/* 		if(c == true){
+/*  		if(c == true){
 			var reviewid = $('#reviewid').txt();
 			alert(reviewid);
 			location.href ='[[@{/review/delete?reviewid=}]]'+reviewid;
@@ -29,7 +29,7 @@ $(document).ready(function () {
                         <div class="bg-light rounded h-100 p-4">
                             <div class="table-responsive" th:each="rdto:${rdto}">
                             
-                            <div class="alert alert-light alert-dismissible fade show" role="alert">
+                            <div class="alert alert-light alert-dismissible fade show" >
                                 <!-- An icon & dismissing primary alert—check it out! -->
                                 <tr>
                                 	<h6>
