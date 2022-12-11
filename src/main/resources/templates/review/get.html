@@ -3,19 +3,15 @@
 
 <head>
 <meta charset="utf-8">
-
+<script src="https://kit.fontawesome.com/3394dbed7b.js" crossorigin="anonymous"></script>
 <script>
-$(document).ready(function () {
-	$('#delete_btn').click(function() {
-		var c = confirm('리뷰를 정말 삭제하시겠습니까?');
-/*  		if(c == true){
-			var reviewid = $('#reviewid').txt();
-			alert(reviewid);
-			location.href ='[[@{/review/delete?reviewid=}]]'+reviewid;
-		} */
-	});
+function reviewdel(reviewid){
+	var c = confirm('리뷰를 정말 삭제하시겠습니까?');
+	if(c == true){
+		location.href ='[[@{/review/delete?reviewid=}]]'+reviewid; 
+	}
+};
 
-});
 </script>
 
 </head>
@@ -23,14 +19,15 @@ $(document).ready(function () {
 <body>
 
 <div class="container-fluid pt-4 px-4">
-			<div class="row g-4" style="float:none; margin:0  auto;">
+
+<!-- 			<div class="row g-4" style="float:none; margin:0  auto;">
 			
 					<div class="col-10" style="float:none; margin:0  auto;">
                         <div class="bg-light rounded h-100 p-4">
                             <div class="table-responsive" th:each="rdto:${rdto}">
                             
                             <div class="alert alert-light alert-dismissible fade show" >
-                                <!-- An icon & dismissing primary alert—check it out! -->
+                                An icon & dismissing primary alert—check it out!
                                 <tr>
                                 	<h6>
                                 	<div th:text="${rdto.reviewid}" id="reviewid" style="display:none">리뷰 고유번호</div>
@@ -46,7 +43,47 @@ $(document).ready(function () {
                         </div>
                     </div>				
 			
+			</div> -->
+			
+			<div class="row g-4">
+			
+					<div class="col-12">
+                        <div class="bg-light rounded h-100 p-4">
+                            <h6 class="mb-4">Responsive Table</h6>
+                            <div class="table-responsive">
+                                <table class="table table-hover" style="text-align:center">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">리뷰 번호</th>
+                                            <th scope="col">작성자 ID</th>
+                                            <th scope="col">리뷰 내용</th>
+                                            <th scope="col">작성일</th>
+                                            <th scope="col">삭제</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="rdto:${rdto}">
+                                            <th style="width:12%" scope="row" th:text="${rdto.reviewid}">
+                                            </th>
+<!--                                             <td>
+		                                    	<a th:href="@{/mentoring/detail(mentoringid=${mti.mentoringid})}"></a>
+                                            </td> -->
+                                            <td th:text="${rdto.userid}"></td>
+                                            <td th:text="${rdto.reviewcon}"></td>
+                                            <td th:text="${#dates.format(rdto.reviewdate,'yyyy/MM/dd HH:mm')}"></td>
+                                            <td>
+                                            	<button th:onclick="reviewdel([[${rdto.reviewid}]])" type="button" class="btn btn-sm btn-dark m-2"><i class="fa-solid fa-trash"></i></button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>				
+			
 			</div>
+						
+			
 		</div>
 
 
