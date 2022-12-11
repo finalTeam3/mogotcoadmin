@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mogotcoadmin.dto.AdminDTO;
+import com.mogotcoadmin.dto.UserDTO;
 import com.mogotcoadmin.service.AdminService;
 import com.mogotcoadmin.service.BoardService;
 
@@ -66,6 +67,31 @@ public class MainController {
 			e.printStackTrace();
 		}
 		return "main";
+	}
+	
+	// 마이페이지
+	@RequestMapping("/mypage")
+	public String mypage(Model model, String adminid) {
+		AdminDTO adm = null;
+		try {
+			model.addAttribute("center", "mypage");
+			adm = service.get(adminid);
+			model.addAttribute("adm", adm);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "main";
+	}
+	
+	//마이페이지 수정 기능
+	@RequestMapping("/mypageupdate")
+	public String mypageupdate(AdminDTO admin) {
+		try {
+			service.modify(admin);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "redirect:mypage?adminid="+admin.getAdminid();
 	}
 	
 }
