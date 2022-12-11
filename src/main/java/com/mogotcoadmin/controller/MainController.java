@@ -2,6 +2,7 @@ package com.mogotcoadmin.controller;
 
 import java.util.List;
 
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mogotcoadmin.dto.AdminDTO;
 import com.mogotcoadmin.dto.MentorDTO;
+import com.mogotcoadmin.dto.UserDTO;
 import com.mogotcoadmin.service.AdminService;
 import com.mogotcoadmin.service.BoardService;
 import com.mogotcoadmin.service.MentorService;
@@ -82,6 +84,31 @@ public class MainController {
 			e.printStackTrace();
 		}
 		return "main";
+	}
+	
+	// 마이페이지
+	@RequestMapping("/mypage")
+	public String mypage(Model model, String adminid) {
+		AdminDTO adm = null;
+		try {
+			model.addAttribute("center", "mypage");
+			adm = service.get(adminid);
+			model.addAttribute("adm", adm);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "main";
+	}
+	
+	//마이페이지 수정 기능
+	@RequestMapping("/mypageupdate")
+	public String mypageupdate(AdminDTO admin) {
+		try {
+			service.modify(admin);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "redirect:mypage?adminid="+admin.getAdminid();
 	}
 	
 }
