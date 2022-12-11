@@ -1,14 +1,12 @@
 package com.mogotcoadmin.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mogotcoadmin.dto.AdminDTO;
 import com.mogotcoadmin.dto.BoardDTO;
+import com.mogotcoadmin.mapper.AjaxMapper;
 import com.mogotcoadmin.service.AdminService;
 import com.mogotcoadmin.service.BoardService;
 
@@ -20,6 +18,9 @@ public class AjaxController {
 	
 	@Autowired
 	BoardService board_service;
+
+	@Autowired
+	AjaxMapper mapper;
 	
 	//회원가입시 아이디 중복체크 기능
 	@RequestMapping("/checkid")
@@ -51,5 +52,25 @@ public class AjaxController {
 		return "";
 	}
 	
+	@RequestMapping("/usercnt")
+	public String usercnt() {
+		int cnt = mapper.getUserCnt();
+		return cnt+"명";
+	}
+	@RequestMapping("/mentorcnt")
+	public String mentorcnt() {
+		int cnt = mapper.getMentorCnt();
+		return cnt+"명";
+	}
+	@RequestMapping("/mentoringcnt")
+	public String mentoringcnt() {
+		int cnt = mapper.getMentoringCnt();
+		return cnt+"명";
+	}
+	@RequestMapping("/purchaseprice")
+	public String purchaseprice() {
+		int price = mapper.getPurchasePrice();
+		return price+"원";
+	}
 	
 }

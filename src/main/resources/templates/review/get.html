@@ -3,7 +3,6 @@
 
 <head>
 <meta charset="utf-8">
-<script src="https://kit.fontawesome.com/3394dbed7b.js" crossorigin="anonymous"></script>
 <script>
 function reviewdel(reviewid){
 	var c = confirm('리뷰를 정말 삭제하시겠습니까?');
@@ -19,37 +18,12 @@ function reviewdel(reviewid){
 <body>
 
 <div class="container-fluid pt-4 px-4">
-
-<!-- 			<div class="row g-4" style="float:none; margin:0  auto;">
-			
-					<div class="col-10" style="float:none; margin:0  auto;">
-                        <div class="bg-light rounded h-100 p-4">
-                            <div class="table-responsive" th:each="rdto:${rdto}">
-                            
-                            <div class="alert alert-light alert-dismissible fade show" >
-                                An icon & dismissing primary alert—check it out!
-                                <tr>
-                                	<h6>
-                                	<div th:text="${rdto.reviewid}" id="reviewid" style="display:none">리뷰 고유번호</div>
-                                	<th th:text="${rdto.userid}+':'">아이디</th>
-                                	<th th:text="${rdto.reviewcon}">리뷰</th>
-                                	</h6>
-                                </tr>
-                                	<div style="text-align:right; font-size:80%" th:text="${#dates.format(rdto.reviewdate,'yyyy/MM/dd HH:mm')}">등록일</div>
-                                <button type="button" class="btn-close" id="delete_btn" data-bs-dismiss="alert" aria-label="Close"></button>
-                            </div>
-                                                 
-                            </div>
-                        </div>
-                    </div>				
-			
-			</div> -->
 			
 			<div class="row g-4">
 			
 					<div class="col-12">
                         <div class="bg-light rounded h-100 p-4">
-                            <h6 class="mb-4">Responsive Table</h6>
+                            <h6 class="mb-4"></h6>
                             <div class="table-responsive">
                                 <table class="table table-hover" style="text-align:center">
                                     <thead>

@@ -1,5 +1,7 @@
 package com.mogotcoadmin.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,8 +10,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mogotcoadmin.dto.AdminDTO;
+import com.mogotcoadmin.dto.MentorDTO;
 import com.mogotcoadmin.service.AdminService;
 import com.mogotcoadmin.service.BoardService;
+import com.mogotcoadmin.service.MentorService;
 
 @Controller
 @RequestMapping("/")
@@ -21,8 +25,20 @@ public class MainController {
 	@Autowired
 	BoardService board_service;
 	
+	@Autowired
+	MentorService mservice;	
+	
 	@RequestMapping("")
-	public String main() {
+	public String main(Model model) {
+		List<MentorDTO> mentor = null;
+		try {
+			mentor = mservice.get();
+			model.addAttribute("mentor",mentor);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		return "main";
 	}
 
