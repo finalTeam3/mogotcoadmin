@@ -65,7 +65,7 @@ public class AjaxController {
 	@RequestMapping("/mentoringcnt")
 	public String mentoringcnt() {
 		int cnt = mapper.getMentoringCnt();
-		return cnt+"명";
+		return cnt+"개";
 	}
 	@RequestMapping("/purchaseprice")
 	public String purchaseprice() {
