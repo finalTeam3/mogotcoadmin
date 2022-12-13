@@ -44,7 +44,7 @@ function reviewdel(reviewid){
                                             </td> -->
                                             <td th:text="${rdto.userid}"></td>
                                             <td th:text="${rdto.reviewcon}"></td>
-                                            <td th:text="${#dates.format(rdto.reviewdate,'yyyy/MM/dd HH:mm')}"></td>
+                                            <td th:text="${#dates.format(rdto.reviewdate,'yyyy/MM/dd')}"></td>
                                             <td>
                                             	<button th:onclick="reviewdel([[${rdto.reviewid}]])" type="button" class="btn btn-sm btn-dark m-2"><i class="fa-solid fa-trash"></i></button>
                                             </td>
