@@ -95,11 +95,11 @@ $(document).ready(function(){
                                 <hr>
                                 
                                 <dt class="col-sm-4">소개</dt>
-                                <dd class="col-sm-8" th:text="${mentor.mentorcon}" style="word-break: break-all"></dd>
+                                <dd class="col-sm-8" th:text="${mentor.mentorcon}" style="word-break: break-all; white-space:pre-wrap;"></dd>
                                 <input th:value=${mentor.mentorcon} name="mentorcon" style="display:none">
 
                                 <dt class="col-sm-4">경력</dt>
-                                <dd class="col-sm-8" th:text="${mentor.mentorcareer}" style="word-break: break-all"></dd>
+                                <dd class="col-sm-8" th:text="${mentor.mentorcareer}" style="word-break: break-all; white-space:pre-wrap;"></dd>
                                 <input th:value=${mentor.mentorcareer} name="mentorcareer" style="display:none">
                                 <hr>
                                 
