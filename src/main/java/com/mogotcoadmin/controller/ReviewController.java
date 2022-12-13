@@ -35,5 +35,16 @@ public class ReviewController {
 		return "main";
 	}
 	
+	// 리뷰 삭제
+	@RequestMapping("/delete")
+	public String delete(Model model, int reviewid) {
+		try {
+			service.remove(reviewid);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "redirect:get";
+	}
+	
 	
 }

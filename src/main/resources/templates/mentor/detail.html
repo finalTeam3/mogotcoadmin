@@ -12,6 +12,13 @@ $(document).ready(function(){
 			'action':'[[@{/mentor/qualifyimpl}]]'
 		});
 		$('#update_form').submit();
+		
+		var email = $('#email').val();
+		$.ajax({
+			type : 'get',
+			url : '[[@{/mentor/emailsend}]]?email=' + email,
+					success : alert('메일 발송 완료')
+		});
 	});
 	
 	$('#cancel_btn').click(function(){
@@ -51,6 +58,10 @@ $(document).ready(function(){
                                 <dt class="col-sm-4">사용자 ID</dt>
                                 <dd class="col-sm-8" th:text="${mentor.userid}"></dd>
                                 <input th:value=${mentor.userid} name="userid" style="display:none">
+                                
+                                <dt class="col-sm-4">사용자 EMAIL</dt>
+                                <dd class="col-sm-8" th:text="${mentor.user_useremail}"></dd>
+                                <input th:value=${mentor.user_useremail} name="useremail" id = "email" style="display:none">
 
                                 <dt class="col-sm-4">담당 관리자</dt>
                                 <dd class="col-sm-8" th:text="${mentor.adminid}"></dd>
@@ -84,11 +95,11 @@ $(document).ready(function(){
                                 <hr>
                                 
                                 <dt class="col-sm-4">소개</dt>
-                                <dd class="col-sm-8" th:text="${mentor.mentorcon}" style="word-break: break-all"></dd>
+                                <dd class="col-sm-8" th:text="${mentor.mentorcon}" style="word-break: break-all; white-space:pre-wrap;"></dd>
                                 <input th:value=${mentor.mentorcon} name="mentorcon" style="display:none">
 
                                 <dt class="col-sm-4">경력</dt>
-                                <dd class="col-sm-8" th:text="${mentor.mentorcareer}" style="word-break: break-all"></dd>
+                                <dd class="col-sm-8" th:text="${mentor.mentorcareer}" style="word-break: break-all; white-space:pre-wrap;"></dd>
                                 <input th:value=${mentor.mentorcareer} name="mentorcareer" style="display:none">
                                 <hr>
                                 

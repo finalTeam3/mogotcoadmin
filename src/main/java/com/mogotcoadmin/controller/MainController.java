@@ -1,16 +1,21 @@
 package com.mogotcoadmin.controller;
 
+import java.util.List;
+
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mogotcoadmin.dto.AdminDTO;
+import com.mogotcoadmin.dto.MentorDTO;
+import com.mogotcoadmin.dto.UserDTO;
 import com.mogotcoadmin.service.AdminService;
-
-
+import com.mogotcoadmin.service.BoardService;
+import com.mogotcoadmin.service.MentorService;
 
 @Controller
 @RequestMapping("/")
@@ -18,9 +23,24 @@ public class MainController {
 	
 	@Autowired
 	AdminService service;
-
+	
+	@Autowired
+	BoardService board_service;
+	
+	@Autowired
+	MentorService mservice;	
+	
 	@RequestMapping("")
-	public String main() {
+	public String main(Model model) {
+		List<MentorDTO> mentor = null;
+		try {
+			mentor = mservice.get();
+			model.addAttribute("mentor",mentor);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		return "main";
 	}
 
@@ -48,6 +68,47 @@ public class MainController {
 		}
 		return "redirect:/";
 	}
-
+	
+	@RequestMapping("/register")
+	public String register(Model model) {
+		model.addAttribute("center", "register");
+		return "main";
+	}
+	
+	//회원가입기능
+	@RequestMapping("/registerimpl")
+	public String registerimpl(AdminDTO admin) {
+		try {
+			service.register(admin);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "main";
+	}
+	
+	// 마이페이지
+	@RequestMapping("/mypage")
+	public String mypage(Model model, String adminid) {
+		AdminDTO adm = null;
+		try {
+			model.addAttribute("center", "mypage");
+			adm = service.get(adminid);
+			model.addAttribute("adm", adm);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "main";
+	}
+	
+	//마이페이지 수정 기능
+	@RequestMapping("/mypageupdate")
+	public String mypageupdate(AdminDTO admin) {
+		try {
+			service.modify(admin);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "redirect:mypage?adminid="+admin.getAdminid();
+	}
 	
 }

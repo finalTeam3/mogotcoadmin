@@ -2,12 +2,110 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<style>
+
+@keyframes blink-effect {
+  50% {
+    opacity: 0.4;
+  }
+}
+
+#blink {
+  animation: blink-effect 1s step-end infinite;
+
+}
+
+</style>
+<script>
+function getUserCnt() {
+	$.ajax({
+		url:'[[@{/usercnt}]]',
+		success:function(data){
+			$('#user_cnt').text(data);
+		}
+	});
+};
+function getMentorCnt() {
+	$.ajax({
+		url:'[[@{/mentorcnt}]]',
+		success:function(data){
+			$('#mentor_cnt').text(data);
+		}
+	});
+};
+function getMentoringCnt() {
+	$.ajax({
+		url:'[[@{/mentoringcnt}]]',
+		success:function(data){
+			$('#mentoring_cnt').text(data);
+		}
+	});
+};
+function getPurchasePrice() {
+	$.ajax({
+		url:'[[@{/purchaseprice}]]',
+		success:function(data){
+			$('#purchase_price').text(data);
+		}
+	});
+};
+
+$(document).ready(function(){
+	getUserCnt();
+	getMentorCnt();
+	getMentoringCnt();
+	getPurchasePrice();
+});
+
+</script>
 </head>
 
 
-            <!-- Recent Sales Start -->
+            <!-- Sale & Revenue Start -->
             <div class="container-fluid pt-4 px-4">
+                <div class="row g-4">
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="bg-light rounded d-flex align-items-center justify-content-between p-4" style="background-color:F4EFE7;">
+                            <i class="fa-solid fa-users fa-3x text-secondary"></i>
+                            <div class="ms-3">
+                                <p class="mb-2" style="font-family:Spoqa Han Sans Neo">총 회원수</p>
+                                <h6 class="mb-0" id="user_cnt">$1234</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+                            <i class="fa-solid fa-user-tie fa-3x text-secondary"></i>
+                            <div class="ms-3">
+                                <p class="mb-2" style="font-family:Spoqa Han Sans Neo">총 멘토수</p>
+                                <h6 class="mb-0" id="mentor_cnt">$1234</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+                            <i class="fa-solid fa-chalkboard-user fa-3x text-secondary"></i>
+                            <div class="ms-3">
+                                <p class="mb-2" style="font-family:Spoqa Han Sans Neo">총 멘토링수</p>
+                                <h6 class="mb-0" id="mentoring_cnt">$1234</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+                            <i class="fa-solid fa-sack-dollar fa-3x text-secondary"></i>
+                            <div class="ms-3">
+                                <p class="mb-2" style="font-family:Spoqa Han Sans Neo">총 매출액</p>
+                                <h6 class="mb-0" id="purchase_price">$1234</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Sale & Revenue End -->
+
+            <!-- Recent Sales Start -->
+<!--             <div class="container-fluid pt-4 px-4">
                 <div class="bg-light text-center rounded p-4">
                     <div class="d-flex align-items-center justify-content-between mb-4">
                         <h6 class="mb-0">Recent Salse</h6>
@@ -21,7 +119,7 @@
                                     <th scope="col">Userid</th>
                                     <th scope="col">Username</th>
                                     <th scope="col">Mentordate</th>
-                                    <!-- <th scope="col">Status</th> -->
+                                    <th scope="col">Status</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -30,35 +128,35 @@
                                     <td>qkrgPwjd1541</td>
                                     <td>박혜정</td>
                                     <td>2022-11-15 14:05:13</td>
-                                    <!-- <td><a class="btn btn-sm btn-danger" href="">승인 대기</a></td> -->
+                                    <td><a class="btn btn-sm btn-danger" href="">승인 대기</a></td>
                                 </tr>
                                 <tr>
                                     <td><input class="form-check-input" type="checkbox"></td>
                                     <td>qkrtjdgns1234</td>
                                     <td>박성훈</td>
                                     <td>2022-11-16 15:05:32</td>
-                                    <!-- <td><a class="btn btn-sm btn-danger" href="">승인 대기</a></td> -->
+                                    <td><a class="btn btn-sm btn-danger" href="">승인 대기</a></td>
                                 </tr>
                                 <tr>
                                     <td><input class="form-check-input" type="checkbox"></td>
                                     <td>tlsehdwns2441</td>
                                     <td>신동준</td>
                                     <td>2022-11-15 14:05:13</td>
-                                    <!-- <td><a class="btn btn-sm btn-danger" href="">승인 대기</a></td> -->
+                                    <td><a class="btn btn-sm btn-danger" href="">승인 대기</a></td>
                                 </tr>
                                 <tr>
                                     <td><input class="form-check-input" type="checkbox"></td>
                                     <td>whdbsdud4321</td>
                                     <td>조윤영</td>
                                     <td>2022-11-15 14:05:13</td>
-                                    <!-- <td><a class="btn btn-sm btn-danger" href="">승인 대기</a></td> -->
+                                    <td><a class="btn btn-sm btn-danger" href="">승인 대기</a></td>
                                 </tr>
 
                             </tbody>
                         </table>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <!-- Recent Sales End -->
 
 
@@ -182,6 +280,50 @@
                 </div>
             </div> -->
             <!-- Widgets End -->
+            
+		<div class="container-fluid pt-4 px-4">
+			<div class="row g-4">
+			
+					<div class="col-12">
+                        <div class="bg-light rounded h-100 p-4">
+                            <h6 class="mb-4"></h6>
+                            <div class="table-responsive">
+                                <table class="table table-hover" style="text-align:center">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">멘토 번호</th>
+                                            <th scope="col">사용자 ID</th>
+                                            <th scope="col">담당 관리자</th>
+                                            <th scope="col">회사</th>
+                                            <th scope="col">신청 날짜</th>
+                                            <th scope="col">승인 날짜</th>
+                                            <th scope="col">승인 여부</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="mentor:${mentor}">
+                                            <th scope="row" th:text="${mentor.mentorid}">
+                                            </th>
+                                            <td>
+		                                    	<a th:text="${mentor.userid}"></a>
+                                            </td>
+                                            <td th:text="${mentor.adminid}"></td>
+                                            <td th:text="${mentor.mentorcom}"></td>
+                                            <td th:text="${#dates.format(mentor.mentorapply,'yyyy-MM-dd HH:mm')}"></td>
+                                            <td th:text="${#dates.format(mentor.mentordate,'yyyy-MM-dd HH:mm')}"></td>
+                                            <td style="width:15%">
+                                            <button type="button" class="btn btn-sm btn-primary m-2" th:if="${mentor.mentorok == 1}">승인 완료</button>
+                                            <button id="blink" type="button" class="btn btn-sm btn-danger m-2" th:if="${mentor.mentorok == 0}">승인 대기</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>				
+			
+			</div>
+		</div>            
 
 
 </html>
