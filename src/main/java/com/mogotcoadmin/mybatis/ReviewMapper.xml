@@ -27,7 +27,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	</select>
 
 	<select id="selectAll" resultType="reviewDTO">
-		SELECT * FROM review
+		SELECT * FROM review ORDER BY reviewid DESC
 	</select>
 	
 	<!-- 멘토상세페이지에서 해당 멘토 리뷰조회 -->
